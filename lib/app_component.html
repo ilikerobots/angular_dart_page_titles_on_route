@@ -1,0 +1,15 @@
+<h1>Setting page title on route change</h1>
+
+<nav>
+  <ul>
+    <li><a [routerLink]="['Players']">Players</a></li>
+    <li><a [routerLink]="['Teams']">Teams</a></li>
+    <li><a [routerLink]="['Fields']">Fields</a></li>
+  </ul>
+</nav>
+
+<div class="content" id="content">
+  <span>Observe the window title while navigating.</span>
+  <router-outlet></router-outlet>
+</div>
+
