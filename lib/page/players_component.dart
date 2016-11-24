@@ -1,6 +1,5 @@
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
-import 'package:angular2/platform/browser.dart' show Title;
 
 @Component(
     selector: 'my-players',
@@ -11,20 +10,15 @@ import 'package:angular2/platform/browser.dart' show Title;
     <li *ngFor="let player of players" (click)="onSelect(player)">{{player}}</li>
     </ul>'''
 )
-class PlayersComponent implements OnActivate {
-  final Title _titleService;
+class PlayersComponent {
   final Router _router;
 
   List<String> players = ["John, Tommy", "Carey, Max", "Nehf, Art", "Brown, Mordecai"];
 
-  PlayersComponent(this._titleService, this._router);
+  PlayersComponent(this._router);
 
   void onSelect(String player) {
     _router.navigate(['/PlayerDetail', {'id': player}]);
   }
 
-  @override
-  void routerOnActivate(ComponentInstruction nextInstruction, ComponentInstruction prevInstruction) {
-    _titleService.setTitle("List of Players");
-  }
 }
