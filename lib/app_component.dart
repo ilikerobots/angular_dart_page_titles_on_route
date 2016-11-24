@@ -30,9 +30,9 @@ class AppComponent {
 
   AppComponent(TitleSetService _titleSet) {
     _titleSet
-      ..baseTitle = "Title Set Demo"
       ..nameStrategy = (ComponentInstruction c) {
         StringBuffer sb = new StringBuffer();
+        sb.write("Title Set Demo | ");
 
         if (c.routeData.data.containsKey('title')) { // if title is in data, use it
           sb.write(c.routeData.data['title']);

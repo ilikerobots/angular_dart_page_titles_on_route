@@ -7,7 +7,6 @@ typedef String TitleNamingFunction(ComponentInstruction c);
 
 @Injectable()
 class TitleSetService {
-  String baseTitle = null;
   TitleNamingFunction nameStrategy;
 
   Router _router;
@@ -21,22 +20,15 @@ class TitleSetService {
   }
 
   Future<Null> _setTitleFromRoute(String url) async {
-    StringBuffer sb = new StringBuffer();
-    if (baseTitle != null) {
-        sb.write(baseTitle);
-    }
-
     //identify component instruction from routed url
     ComponentInstruction compInst = (await _router.recognize(url))?.component;
     if (compInst != null) {
-      sb.write(" | " + nameStrategy(compInst));
+      _title.setTitle(nameStrategy(compInst));
     }
-
-    _title.setTitle(sb.toString());
   }
 
   String _defaultNameStrategy(ComponentInstruction compInst) {
-      return compInst.routeName;
+    return compInst.routeName;
   }
 
 }
