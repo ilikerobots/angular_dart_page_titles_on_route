@@ -29,22 +29,24 @@ import 'package:angular_dart_page_titles_on_route/title_set_component.dart';
 class AppComponent {
 
   AppComponent(TitleSetService _titleSet) {
-    _titleSet
-      ..nameStrategy = (ComponentInstruction c) {
-        StringBuffer sb = new StringBuffer();
-        sb.write("Title Set Demo | ");
-
-        if (c.routeData.data.containsKey('title')) { // if title is in data, use it
-          sb.write(c.routeData.data['title']);
-        } else { //otherwise use route name
-          sb.write(c.routeName);
-        }
-
-        if (c.params.containsKey('id')) { // if detail id in params, append it
-          sb.write(": ${c.params['id']}");
-        }
-        return sb.toString();
-      };
+    _titleSet.nameStrategy = _setTitle;
   }
+
+  String _setTitle(ComponentInstruction c) {
+    StringBuffer sb = new StringBuffer();
+    sb.write("Title Set Demo | ");
+
+    if (c.routeData.data.containsKey('title')) { // if title is in data, use it
+      sb.write(c.routeData.data['title']);
+    } else { //otherwise use route name
+      sb.write(c.routeName);
+    }
+
+    if (c.params.containsKey('id')) { // if detail id in params, append it
+      sb.write(": ${c.params['id']}");
+    }
+    return sb.toString();
+  }
+
 
 }
